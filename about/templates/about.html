@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>About Us - Adhyayan Coaching Institute</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; }
+        nav a {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: black;
+            transition: width 0.3s ease;
+        }
+        nav a:hover,
+        nav a.active {
+            color: black;
+        }
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white transition duration-300">
+
+<!-- Navbar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        <h1 class="text-xl md:text-2xl font-extrabold text-black">Adhyayan Coaching Institute</h1>
+        <nav class="hidden md:flex gap-6 font-medium text-gray-700">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'index' %}">Courses</a>
+            <a href="{% url 'topper1' %}">Toppers</a>
+            <a href="{% url 'cont' %}">Contact</a>
+        </nav>
+        <button id="mobile-menu-button" class="md:hidden text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-6 pb-4 text-gray-800 bg-gray-100">
+        <a href="{% url 'home' %}" class="block py-2 hover:text-black">Home</a>
+        <a href="{% url 'index' %}" class="block py-2 hover:text-black">Courses</a>
+        <a href="{% url 'topper1' %}" class="block py-2 hover:text-black">Toppers</a>
+        <a href="{% url 'cont' %}" class="block py-2 hover:text-black">Contact</a>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="text-center py-24 mt-20 bg-white dark:bg-gray-800 shadow-md">
+    <h1 class="text-5xl font-bold mb-4" data-aos="fade-down">About Us</h1>
+    <p class="text-lg max-w-2xl mx-auto" data-aos="fade-up">We build modern, user-first software solutions.</p>
+</section>
+
+<!-- Mission -->
+<section class="py-16 px-6 md:px-20 bg-gray-100 dark:bg-gray-800">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <img src="https://th.bing.com/th/id/OIP.iyyEf1jYCMIAqY_m6W_4IQHaHa?cb=iwc2&w=626&h=626&rs=1&pid=ImgDetMain" alt="Mission" class="rounded-lg shadow-lg" data-aos="zoom-in-right">
+        <div data-aos="fade-left">
+            <h2 class="text-3xl font-bold mb-4">Our Mission</h2>
+            <p class="text-lg">We are committed to building beautiful, high-performing tools that make life better for users around the world.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Core Values -->
+<section class="py-16 px-6 md:px-20">
+    <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl font-bold">Our Core Values</h2>
+        <p class="text-gray-600 dark:text-gray-300 mt-2">Guiding principles behind everything we do.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-xl font-semibold mb-2">Innovation</h3>
+            <p class="text-gray-600 dark:text-gray-300">We constantly push the boundaries of what's possible.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-xl font-semibold mb-2">Integrity</h3>
+            <p class="text-gray-600 dark:text-gray-300">We operate with transparency and accountability.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="text-xl font-semibold mb-2">User Focus</h3>
+            <p class="text-gray-600 dark:text-gray-300">User experience is always our top priority.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Founder (Centered) -->
+<section class="py-16 px-6 md:px-20 bg-gray-100 dark:bg-gray-800">
+    <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl font-bold">Meet the Team</h2>
+        <p class="text-gray-600 dark:text-gray-300">The minds behind the mission.</p>
+    </div>
+    <div class="flex justify-center" data-aos="zoom-in">
+        <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg">
+            <img src="https://i.postimg.cc/RVjLGMXj/IMG-20250519-WA0018.jpg" alt="Founder" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+            <h3 class="text-xl font-semibold">Er. Mithlesh Chaursiya</h3>
+            <p class="text-gray-500 dark:text-gray-300">Founder & CEO</p>
+        </div>
+    </div>
+</section>
+
+<!-- Mentors (Static HTML Cards) -->
+<section class="py-16 px-6 md:px-20 bg-gray-100 dark:bg-gray-800">
+    <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl font-bold">Our Teachers & Mentors</h2>
+        <p class="text-gray-600 dark:text-gray-300 mt-2">Experienced educators guiding your success.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://freeimghost.net/images/2025/05/19/1747674467827.jpg" alt="Niddhi" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+            <h3 class="text-xl font-semibold">Dr. Niddhi Singh</h3>
+            <p class="text-gray-500 dark:text-gray-300">Biology Mentor</p>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">BHMS, Virar Homeopathy College</p>
+        </div>
+        <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://i.postimg.cc/RVjLGMXj/IMG-20250519-WA0018.jpg" alt="Mithlesh" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+            <h3 class="text-xl font-semibold">Er. Mithlesh Chaursiya</h3>
+            <p class="text-gray-500 dark:text-gray-300">Mathematics & Physics Mentor</p>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">BE Mechanical, SPCE</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Back Button -->
+<div class="text-center mb-8">
+    <button onclick="history.back()" class="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition">← Back</button>
+</div>
+
+<!-- Footer -->
+<footer class="py-6 text-center bg-white dark:bg-gray-800">
+    <p class="text-gray-600 dark:text-gray-400">© 2025 Adhyayan Coaching Institute. All rights reserved.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+    document.getElementById("mobile-menu-button").addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+    });
+</script>
+
+</body>
+</html>

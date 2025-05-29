@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Adhyayan Coaching Institute</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: black;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-white text-black">
+
+<!-- Navbar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl md:text-2xl font-extrabold text-black">Adhyayan Coaching Institute</h1>
+    <nav class="hidden md:flex gap-6 font-medium text-gray-800 relative">
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'index' %}">Courses</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'topper1' %}">Toppers</a>
+
+    </nav>
+    <button class="md:hidden text-gray-800" id="mobile-menu-button">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden px-6 pb-4 bg-gray-100 text-black">
+    <a href="{% url 'home' %}" class="block py-2">Home</a>
+    <a href="{% url 'index' %}" class="block py-2">Courses</a>
+    <a href="{% url 'about' %}" class="block py-2">About</a>
+    <a href="{% url 'topper1' %}" class="block py-2">Toppers</a>
+  </div>
+</header>
+
+<!-- Spacer -->
+<div class="h-20"></div>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 max-w-7xl mx-auto px-6 sm:px-12">
+  <h2 class="text-3xl font-extrabold text-center mb-12" data-aos="fade-up">Get in Touch</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+    <!-- Contact Info -->
+    <div class="space-y-6" data-aos="fade-right">
+      <div class="flex items-center gap-4 text-lg">
+        <i class="fas fa-phone text-black"></i>
+        <span>+91 8879240450</span>
+      </div>
+      <div class="flex items-center gap-4 text-lg">
+        <i class="fas fa-envelope text-black"></i>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dubeysaksham801@gmail.com" target="_blank">
+  Send Email
+</a>
+
+      </div>
+      <div class="flex items-center gap-4 text-lg">
+        <i class="fab fa-youtube text-black"></i>
+        <a href="https://www.youtube.com/@MotivationMentor_MithileshSir" target="_blank" class="hover:underline">YouTube Channel</a>
+      </div>
+      <div class="w-full">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.8327736235674!2d72.83128607503065!3d19.20250498202831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7ff62d1852b%3A0x3b851238774d6d93!2sAdhyayan%20Coaching%20Institute!5e0!3m2!1sen!2sin!4v1748008378825!5m2!1sen!2sin"
+          width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-lg"></iframe>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+
+    <form class="space-y-6" data-aos="fade-left"  method="POST">
+         {% csrf_token %}
+      <input type="text" placeholder="Your Name" name="name" required
+             class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" />
+      <input type="email" placeholder="Your Email" name = 'email' required
+             class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" />
+        <input type="number" placeholder="Your Mobile No" name = 'phone' required
+             class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black" />
+      <textarea rows="5" placeholder="Your Message" name ='message' required
+                class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+      <button type="submit"
+              class="bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-900 transition w-full sm:w-auto">
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-gray-400 text-center py-6">
+  &copy; 2025 Adhyayan Coaching Institute. All rights reserved.
+</footer>
+
+<!-- Scripts -->
+<script>
+  AOS.init({ once: true, duration: 900 });
+
+  const btn = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Signup / OTP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 950px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+      transition: 0.5s ease-in-out;
+      justify-content: center;
+      padding: 40px 60px;
+      flex-direction: column;
+      max-width: 400px;
+    }
+
+    .form-container {
+      width: 100%;
+      transition: 0.6s ease-in-out;
+    }
+
+    .form-container h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form input {
+      padding: 14px 18px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    form input::placeholder {
+      color: #bbb;
+    }
+
+    form input:focus {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    form button {
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background-color: #fff;
+      color: #000;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      letter-spacing: 0.05em;
+    }
+
+    form button:hover {
+      background-color: #ddd;
+    }
+
+    .switch-btn {
+      margin-top: 20px;
+      background: transparent;
+      border: 1px solid #fff;
+      padding: 12px 30px;
+      border-radius: 50px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      align-self: center;
+      user-select: none;
+    }
+
+    .switch-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 480px) {
+      form input,
+      form button {
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      .container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="main-container">
+
+    <!-- Login -->
+    <div class="form-container login-container">
+      <h2>Welcome Back</h2>
+      <form method="post" id="login-form" onsubmit="return loginSubmit(event)">
+        {% csrf_token %}
+        <input type="text" placeholder="Email/User Name" required name="email" />
+        <input type="hidden" name="form_type" value="login" />
+        <input type="password" placeholder="Password" required name="password" />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- Signup -->
+    <div class="form-container signup-container" style="display:none;">
+      <h2>Create Account</h2>
+      <form method="post" id="signup-form" onsubmit="return signupSubmit(event)">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="hidden" name="form_type" value="signup" />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="number" name="age" placeholder="Age" required />
+        <input type="number" name="phone_no" placeholder="Mobile No" required />
+        <input type="text" name="user_name" placeholder="User Name" required />
+        <input type="password" id="password" name="password" placeholder="Password" required />
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    <!-- OTP Submission -->
+    <div class="form-container otp-container" style="display:none;">
+      <h2>Verify OTP</h2>
+      <form method="post" id="otp-form" onsubmit="return validateOtp()">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="otp"
+          id="otp"
+          placeholder="••••••"
+          maxlength="10"
+          pattern="[a-zA-Z0-9]{4,10}"
+          required
+        />
+        <input type="hidden" name="form_type" value="otp" />
+        <button type="submit">Submit OTP</button>
+      </form>
+      <button class="switch-btn" onclick="backToLogin()">Back to Login</button>
+    </div>
+  </div>
+
+  <button class="switch-btn" id="toggle-form-btn" onclick="toggleForm()">Switch to Signup</button>
+
+  <script>
+    const container = document.getElementById('main-container');
+    const switchBtn = document.getElementById('toggle-form-btn');
+
+    // Toggle Login / Signup forms
+    function toggleForm() {
+      const login = document.querySelector('.login-container');
+      const signup = document.querySelector('.signup-container');
+      if (login.style.display !== 'none') {
+        login.style.display = 'none';
+        signup.style.display = 'block';
+        switchBtn.textContent = 'Switch to Login';
+      } else {
+        login.style.display = 'block';
+        signup.style.display = 'none';
+        switchBtn.textContent = 'Switch to Signup';
+      }
+    }
+
+    // Password validation for Signup form
+    function validatePasswords() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm_password').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false;
+      }
+      // You can add more validation here
+      return true;
+    }
+
+    // OTP validation
+    function validateOtp() {
+      const otp = document.getElementById('otp').value.trim();
+      const otpRegex = /^[a-zA-Z0-9]{6}$/;  // Alphanumeric 4 to 10 chars
+      if (!otpRegex.test(otp)) {
+        alert('Please enter a valid OTP .');
+        return false;
+      }
+      alert('OTP Submitted: ' + otp);
+      // Add your OTP submission logic here
+      return true;
+    }
+
+    // Simulate Login submission & show OTP form
+    function loginSubmit(event) {
+      event.preventDefault();
+
+      // You can add real login API call here
+      alert('Login submitted! Proceed to OTP verification.');
+
+      // Show OTP form, hide others and toggle button
+      showOtpForm();
+      return false;
+    }
+
+    // Signup submit: validate passwords and then show OTP form
+    function signupSubmit(event) {
+      event.preventDefault();
+      if (!validatePasswords()) {
+        return false; // if passwords do not match, stop submission
+      }
+
+      // If password validation passes, show OTP form
+      document.querySelector('.signup-container').style.display = 'none';
+      document.querySelector('.otp-container').style.display = 'block';
+      switchBtn.style.display = 'none'; // hide toggle button during OTP
+
+      alert('Signup validated! Please enter the OTP sent to you.');
+
+      return false;
+    }
+
+    function showOtpForm() {
+      document.querySelector('.login-container').style.display = 'none';
+      document.querySelector('.signup-container').style.display = 'none';
+      document.querySelector('.otp-container').style.display = 'block';
+      switchBtn.style.display = 'none'; // Hide switch btn during OTP
+    }
+
+    function backToLogin() {
+      document.querySelector('.otp-container').style.display = 'none';
+      document.querySelector('.login-container').style.display = 'block';
+      switchBtn.style.display = 'inline-block';
+      switchBtn.textContent = 'Switch to Signup';
+    }
+  </script>
+</body>
+</html>
